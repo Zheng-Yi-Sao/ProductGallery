@@ -19,8 +19,6 @@ app.get('*/dp/:productId', sendIndex);
 
 //Create
 app.post('/images', (req, res) => {
-  console.log('SERVER REQ BODY:', req.body);
-
   db.models.ProductImages.countDocuments({}, (err, size) => {
     if (err) {
       res.status(400).send(err);
@@ -34,7 +32,7 @@ app.post('/images', (req, res) => {
       });
     }
   });
-
+  // Old Code
   // db.models.ProductImages.insert({productId}, (err, product) => {
   //   if (product !== null) {
   //     res.json(product);
@@ -70,7 +68,12 @@ app.get('/images/:productId', (req, res) => {
 //Update
 app.put('/images/:productId', (req, res) => {
   const productId = req.params.productId;
-  db.models.ProductImages.update({productId}, (err, product) => {
+  db.models.ProductImages.update({productId}, {productId: productId, images: req.body.images}, (err, product) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send('Update Complete!');
+    }
     console.log('SERVER UPDATE PROD:', product);
   //   if (product !== null) {
   //     res.json(product);
@@ -90,7 +93,12 @@ app.put('/images/:productId', (req, res) => {
 app.delete('/images/:productId', (req, res) => {
   const productId = req.params.productId;
   db.models.ProductImages.deleteOne({productId}, (err, product) => {
-    console.log('SERVER DELETE PROD:', product);
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      console.log('SERVER DELETE PROD:', product);
+      res.status(200).send('Delete Complete!');
+    }
     // if (product !== null) {
     //   res.json(product);
     // } else {
