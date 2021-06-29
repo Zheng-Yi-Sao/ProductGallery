@@ -72,9 +72,9 @@ app.put('/images/:productId', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
+      console.log('SERVER UPDATE PROD:', product);
       res.status(200).send('Update Complete!');
     }
-    console.log('SERVER UPDATE PROD:', product);
   //   if (product !== null) {
   //     res.json(product);
   //   } else {
