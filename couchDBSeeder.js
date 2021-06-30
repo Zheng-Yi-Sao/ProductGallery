@@ -14,7 +14,6 @@ let seedScript = (dbCount = 1) => {
   }
   axios.post(url, bulk)
     .then((res) => {
-      console.log('couchDB Seeded 1000:', res);
       if (dbCounter < 10000000) {
         seedScript(dbCounter);
       }
