@@ -16,7 +16,6 @@ let seedScript = (dbCount = 1) => {
     .then((res) => {
       console.log('couchDB Seeded 1000:', res);
       if (dbCounter < 10000000) {
-        bulk.docs = [];
         seedScript(dbCounter);
       }
     })
