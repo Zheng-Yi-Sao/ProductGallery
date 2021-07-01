@@ -19,7 +19,7 @@ let seedScript = (dbCount = 1) => {
       }
     })
     .catch((err) => {
-      console.log('couchDB res - ERROR:', err);
+      console.log('couchDB RES - ERROR:', err);
     });
 };
 seedScript();
