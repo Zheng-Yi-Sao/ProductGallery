@@ -22,7 +22,10 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get(`http://${this.galleryip}:3003/images/` + this.state.productId)
-      .then(res => this.setState(res.data))
+      .then((res) => {
+        console.log('CLIENT - RES:', res.data);
+        this.setState(res.data);
+      })
       .catch(err => {
         if (err.response) {
           console.error(err.response);
@@ -31,15 +34,15 @@ class App extends React.Component {
         }
       });
 
-    axios.get(`http://${this.overviewip}:3002/overview/` + this.state.productId)
-      .then(res => this.setState({productName: res.data.product_name}))
-      .catch(err => {
-        if (err.response) {
-          console.error(err.response);
-        } else {
-          console.error(err.message + ' - overview API could not be reached', err.config);
-        }
-      });
+    // axios.get(`http://${this.overviewip}:3002/overview/` + this.state.productId)
+    //   .then(res => this.setState({productName: res.data.product_name}))
+    //   .catch(err => {
+    //     if (err.response) {
+    //       console.error(err.response);
+    //     } else {
+    //       console.error(err.message + ' - overview API could not be reached', err.config);
+    //     }
+    //   });
   }
 
   render() {
