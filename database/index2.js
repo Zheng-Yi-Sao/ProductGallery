@@ -1,3 +1,4 @@
+require('newrelic');
 const config = require('../config.js');
 const mysql = require('mysql');
 
